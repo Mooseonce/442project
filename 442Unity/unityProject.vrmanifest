@@ -1,0 +1,16 @@
+{
+  "source": "Unity",
+  "applications": [
+    {
+      "app_key": "application.generated.unity.442project.exe",
+      "launch_type": "url",
+      "url": "steam://launch/",
+      "action_manifest_path": "D:\\UnityStuff\\442VrProject\\442project\\442Unity\\actions.json",
+      "strings": {
+        "en_us": {
+          "name": "442Project [Testing]"
+        }
+      }
+    }
+  ]
+}
