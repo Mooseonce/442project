@@ -23,7 +23,7 @@ public class Spawner : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player" && timer <= 0)
         {
-            Instantiate(itemToSpawn,spawnLocation.position + transform.up,spawnLocation.rotation);
+            Instantiate(itemToSpawn,spawnLocation.position ,spawnLocation.rotation);
             timer = 1.0f; // to prevent the player from accidedntly double tapping.
         }
     }
