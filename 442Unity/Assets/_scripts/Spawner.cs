@@ -6,7 +6,7 @@ public class Spawner : MonoBehaviour
 {
     public float timer;
     public GameObject itemToSpawn;
-    public Transform spawnLocation;
+    public Transform spawnLocation,spawnParent;
     // Start is called before the first frame update
     void Start()
     {
@@ -23,7 +23,8 @@ public class Spawner : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player" && timer <= 0)
         {
-            Instantiate(itemToSpawn,spawnLocation.position ,spawnLocation.rotation);
+            GameObject clone = Instantiate(itemToSpawn,spawnLocation.position ,spawnLocation.rotation) as GameObject;
+            clone.transform.parent = spawnParent;
             timer = 1.0f; // to prevent the player from accidedntly double tapping.
         }
     }
