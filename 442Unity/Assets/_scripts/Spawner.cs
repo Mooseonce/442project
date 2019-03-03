@@ -25,6 +25,7 @@ public class Spawner : MonoBehaviour
         {
             GameObject clone = Instantiate(itemToSpawn,spawnLocation.position ,spawnLocation.rotation) as GameObject;
             clone.transform.parent = spawnParent;
+            if (clone.active == false) { clone.active = true; }
             timer = 1.0f; // to prevent the player from accidedntly double tapping.
         }
     }

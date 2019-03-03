@@ -37,7 +37,7 @@ public class Vcr : MonoBehaviour
                     oldEnviroment = activeEnviroment;
                     activeEnviroment = enviromentsToLoad[other.GetComponent<Cartridge>().value];
                     visualIndicator.GetComponent<Renderer>().material = other.GetComponent<Cartridge>().color;
-                    foreach (Transform go in spawnParent.transform) { Destroy(go); }
+                    foreach (Transform go in spawnParent.transform) { Destroy(go.gameObject); }
                 }
 
             }
