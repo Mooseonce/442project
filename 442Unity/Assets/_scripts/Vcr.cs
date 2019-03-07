@@ -18,7 +18,9 @@ public class Vcr : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Vector3.Distance(activeEnviroment.transform.position, enviromentPositions[0].position) > 0)
+        if (Input.GetKeyDown(KeyCode.Escape)) { Application.Quit(); }
+
+        if (Vector3.Distance(activeEnviroment.transform.position, enviromentPositions[0].position) > 0)//check distance move active enviroment to centered positon
         {
             activeEnviroment.transform.position = Vector3.MoveTowards(activeEnviroment.transform.position,enviromentPositions[0].position, Time.deltaTime * speed * 1.2f);
             oldEnviroment.transform.position = Vector3.MoveTowards(oldEnviroment.transform.position, enviromentPositions[1].position, Time.deltaTime * speed);
@@ -30,7 +32,7 @@ public class Vcr : MonoBehaviour
     {
         if (other.gameObject != lastLoadedCart && other.GetComponent<Cartridge>() != null)
         {
-            if (other.GetComponent<Cartridge>().type == 0)
+            if (other.GetComponent<Cartridge>().type == 0)//0 hoops with launcher,1: basketball, 2: launcher with cubes to knockover
             { if (other.GetComponent<Cartridge>().value < enviromentsToLoad.Count)
                 {
                     lastLoadedCart = other.gameObject;
