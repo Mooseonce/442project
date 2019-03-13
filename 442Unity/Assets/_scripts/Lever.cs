@@ -20,7 +20,7 @@ public class Lever : MonoBehaviour
     }
     public void HandleReleased()
     {
-        if (grabberHandle.transform.localPosition.z < 0.5f) {
+        if (grabberHandle.transform.localPosition.z < 0.3f) {
             on = false;
             ofOffLightObject.GetComponent<Renderer>().material = offColor;
             grabberHandle.GetComponent<ConfigurableJoint>().targetPosition = new Vector3(0, 0, 0);
@@ -29,7 +29,7 @@ public class Lever : MonoBehaviour
         {
             on = true;
             ofOffLightObject.GetComponent<Renderer>().material = onColor;
-            grabberHandle.GetComponent<ConfigurableJoint>().targetPosition = new Vector3(0,0,-1.0f);
+            grabberHandle.GetComponent<ConfigurableJoint>().targetPosition = new Vector3(0,0,1.0f);
 
         }
     }
