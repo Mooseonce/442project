@@ -1,0 +1,14 @@
+1. Set up your Vive based on instruction it provides.
+2. Open https://github.com/Mooseonce/442project in your internet browser.
+3. Select the clone or download button.
+4. Download ZIP.
+5. Save the game to a folder of your choice.
+6. When download has finished navigate your files to where you have saved game and extract the project.
+7. Run the executable.
+8. Once running, wearing your Vive should put you into a room with cassette tapes and VCR or our Virtual Control Receiver.
+9. Using the touchpad button on your Vive controller and pointing at a location you can move yourself around the scene via teleportation.
+10. Using your Vive controller, use the trigger to pick up the blue labeled cassette and load it into the tape deck.
+11. Your surroundings should now change to a room with a basketball hoop and balls.
+12. Using the trigger on the Vive controller, you can pick up the balls.
+13. Try and make a basket by throwing a ball by releasing the trigger at the appropriate timing and motion. 
+14. When a ball makes the hoop the game should keep a count of the number of baskets made in its scoreboard.
