@@ -5,8 +5,9 @@ using UnityEngine;
 public class Cannon : MonoBehaviour
 {
     public Transform barrel,cannonBase,spawnSpot, spawnParent;
-    public GameObject bullet;
-    
+    public GameObject defaultBullet,loadedBullet;
+    public List<GameObject> loadedBullets;
+    public bool singleShot;
     // Start is called before the first frame update
     void Start()
     {
@@ -20,6 +21,7 @@ public class Cannon : MonoBehaviour
     }
     public void RotateCannon( int dir)
     {
+       
          switch(dir)
         {
             case 0:
@@ -36,25 +38,44 @@ public class Cannon : MonoBehaviour
                 cannonBase.transform.localEulerAngles = new Vector3(0, cannonBase.transform.localEulerAngles.y - 5, 0);
                 break;
             case 4:
-                GameObject clone = Instantiate(bullet, spawnSpot.position, spawnSpot.rotation) as GameObject;
-                clone.transform.parent = spawnParent;
-                clone.GetComponent<Rigidbody>().velocity = (spawnSpot.transform.position - barrel.position).normalized * 1200.0f * Time.deltaTime;
+                Launch(1200.0f);
+                loadedBullet = null;
                 break;
             case 5:
-                GameObject clone1 = Instantiate(bullet, spawnSpot.position, spawnSpot.rotation) as GameObject;
-                clone1.transform.parent = spawnParent;
-                clone1.GetComponent<Rigidbody>().velocity = (spawnSpot.transform.position - barrel.position).normalized * 1600.0f * Time.deltaTime;
+                Launch(1600.0f);
                 break;
             case 6:
-                GameObject clone2 = Instantiate(bullet, spawnSpot.position, spawnSpot.rotation) as GameObject;
-                clone2.transform.parent = spawnParent;
-                clone2.GetComponent<Rigidbody>().velocity = (spawnSpot.transform.position - barrel.position).normalized * 2000.0f * Time.deltaTime;
+                Launch(2000.0f);
                 break;
             default:
-                GameObject clone3 = Instantiate(bullet, spawnSpot.position, spawnSpot.rotation) as GameObject;
-                clone3.transform.parent = spawnParent;
-                clone3.GetComponent<Rigidbody>().velocity = (spawnSpot.transform.position - barrel.position).normalized * 1300.0f * Time.deltaTime;
+                Launch(1800.0f);
                 break;
          }
+    }
+
+    public void Launch(float power)
+    {
+        GameObject clone;
+        if (loadedBullets.Count > 0 )
+        { 
+            clone = loadedBullets[loadedBullets.Count - 1];
+            clone.transform.position = spawnSpot.position;
+            clone.transform.rotation = spawnSpot.rotation;
+            loadedBullets.RemoveAt(loadedBullets.Count - 1);
+        }
+        else { clone  = Instantiate(defaultBullet, spawnSpot.position, spawnSpot.rotation) as GameObject; }
+        // clone = Instantiate(bullet, spawnSpot.position, spawnSpot.rotation) as GameObject;
+        clone.transform.parent = spawnParent;
+        clone.GetComponent<Rigidbody>().velocity = (spawnSpot.transform.position - barrel.position).normalized * power * Time.deltaTime;
+       // loadedBullet = null;
+    }
+    public void LoadBullet(GameObject newBullet)
+    {
+        loadedBullets.Insert(0,newBullet);
+            }
+    public void unloadBullet(GameObject newBullet)
+    {
+        if (loadedBullets.Contains(newBullet)) { loadedBullets.Remove(newBullet); }
+       
     }
 }

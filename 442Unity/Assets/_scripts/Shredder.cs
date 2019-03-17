@@ -5,6 +5,8 @@ using UnityEngine;
 public class Shredder : MonoBehaviour
 {
     public string objectTypeToDestroy;
+    public bool loader;
+    public Cannon mortorToLoad;
     // Start is called before the first frame update
     void Start()
     {
@@ -18,6 +20,17 @@ public class Shredder : MonoBehaviour
     }
     public void OnTriggerEnter(Collider other)
     {
-        if (other.tag == objectTypeToDestroy) { Destroy(other.gameObject); }
+        if (loader == true && mortorToLoad != null && other.GetComponent<Rigidbody>() != null)
+        { mortorToLoad.LoadBullet(other.gameObject); }
+        else
+        {
+            if (other.tag == objectTypeToDestroy) { Destroy(other.gameObject); }
+        }
+    }
+    public void OnTriggerExit(Collider other)
+    {
+        if (loader == true && mortorToLoad != null && other.GetComponent<Rigidbody>() != null)
+        { mortorToLoad.unloadBullet(other.gameObject); }
+       
     }
 }
