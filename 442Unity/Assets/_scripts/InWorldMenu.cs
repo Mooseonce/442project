@@ -13,7 +13,7 @@ public class InWorldMenu : MonoBehaviour
     public List<InWorldMenu>  menuButtons;
     public List<GameObject> availableObjects; //objects that will be shown in menu
     public int menuType,menuPage; //main menu, page turn, item display || which group of objects to display
-    public GameObject displayedObject,realObject,spawnSpot,subObjects; //which decoration or toy this element is displaying, and the prefab it is made from
+    public GameObject sitSpot,rootObject,displayedObject,realObject,spawnSpot,subObjects; //which decoration or toy this element is displaying, and the prefab it is made from
     public InWorldMenu mainMenu;
     public bool canSpawn,isMainMenu;
     public Material pressedColor,notPressedColor;
@@ -59,6 +59,8 @@ public class InWorldMenu : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (menuType == 0) { rootObject.transform.position = sitSpot.transform.position; rootObject.transform.rotation = sitSpot.transform.rotation; }
+        if (displayedObject != null) { displayedObject.transform.position = transform.position; displayedObject.transform.rotation = transform.rotation; }
         if (Input.GetKeyDown(KeyCode.A) && menuType == 0)
         { UpdateMenuDisplayed(-1); }
         if (Input.GetKeyDown(KeyCode.D) && menuType == 0)
@@ -83,7 +85,9 @@ public class InWorldMenu : MonoBehaviour
         if (displayedObject.GetComponent<Rigidbody>() != null) { displayedObject.GetComponent<Rigidbody>().isKinematic = true; }
 
         if (displayedObject.GetComponent<Collider>() != null)
-        { displayedObject.GetComponent<Collider>().enabled = false; }
+        {
+            //displayedObject.GetComponent<Collider>().enabled = false;
+        }
             displayedObject.transform.parent = this.transform;
         
     }
@@ -101,6 +105,21 @@ public class InWorldMenu : MonoBehaviour
         }
         menuPage = newPage;
     }
+    public void SpawnObject(GameObject toSpawn,InWorldMenu buttonPressed,Vector3 loc)
+    {
+        if (canSpawn == true)
+        {
+            canSpawn = false;
+
+           // GameObject clone = Instantiate(toSpawn, spawnSpot.transform.position, transform.rotation) as GameObject;
+            //displayedObject.transform.parent = null;
+            displayedObject.GetComponent<Rigidbody>().isKinematic = false;
+            displayedObject.transform.localScale = new Vector3(displayedObject.transform.localScale.x / 0.3f, displayedObject.transform.localScale.y / 0.3f, displayedObject.transform.localScale.z / 0.3f);
+            buttonPressed.displayedObject = null;
+            buttonPressed.SetMenuItem(realObject);
+        }
+    }
+
     public void OnColliderEventPressEnter(ColliderButtonEventData eventData)
     {
        
@@ -118,15 +137,20 @@ public class InWorldMenu : MonoBehaviour
                 break;
             case 3: //itemspawn
                     //on controller grab spawn the real object represented by the menu item displayed here
-                if (canSpawn == true)
+                if  (mainMenu != null && mainMenu.canSpawn == true)
                 {
-                    canSpawn = false;
+                    mainMenu.canSpawn = false;
 
                     GameObject clone = Instantiate(realObject, spawnSpot.transform.position, transform.rotation) as GameObject;
+                    displayedObject.transform.parent = null;
+                    displayedObject.GetComponent<Rigidbody>().isKinematic = false;
+                    displayedObject.transform.localScale = new Vector3(displayedObject.transform.localScale.x / 0.3f, displayedObject.transform.localScale.y / 0.3f, displayedObject.transform.localScale.z / 0.3f);
+                    displayedObject = null;
+                    SetMenuItem(realObject);
                     //clone.GetComponent<Rigidbody>().useGravity = false;
                     //clone.GetComponent<Rigidbody>().isKinematic = true;
-                  // SetAxis("HTC_VIU_UnityAxis1") = 0;
-                     //   clone.SendMessage("IColliderEventDragStartHandler", eventData);
+                    // SetAxis("HTC_VIU_UnityAxis1") = 0;
+                    //   clone.SendMessage("IColliderEventDragStartHandler", eventData);
                     //if (eventData.pressEnteredObjects[0].transform != null)
                     //{
                     //    clone.transform.parent = eventData.pressEnteredObjects[0].transform.root;
@@ -171,6 +195,7 @@ public class InWorldMenu : MonoBehaviour
     }
     public void OnColliderEventHoverEnter(ColliderHoverEventData eventData)
     {
+       
         canSpawn = true;
     }
 
