@@ -7,6 +7,7 @@ public class PhysicsButton : MonoBehaviour
     public float timer;
     public GameObject controlledObject;
     public int value;
+    public string messageToSend;
     // Start is called before the first frame update
     void Start()
     {
@@ -23,7 +24,9 @@ public class PhysicsButton : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player" && timer <= 0)
         {
-            controlledObject.GetComponent<Cannon>().RotateCannon(value);
+
+            controlledObject.SendMessage(messageToSend, value);
+            //controlledObject.GetComponent<Cannon>().RotateCannon(value);
             timer = 0.1f; // to prevent the player from accidedntly double tapping.
         }
     }
