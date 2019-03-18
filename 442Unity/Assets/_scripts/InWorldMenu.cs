@@ -12,12 +12,13 @@ public class InWorldMenu : MonoBehaviour
 {
     public List<InWorldMenu>  menuButtons;
     public List<GameObject> availableObjects; //objects that will be shown in menu
-    public int menuType,menuPage; //main menu, page turn, item display || which group of objects to display
+    public int menuType,menuPage,swipeDirection; //main menu, page turn, item display || which group of objects to display
     public GameObject sitSpot,rootObject,displayedObject,realObject,spawnSpot,subObjects; //which decoration or toy this element is displaying, and the prefab it is made from
-    public InWorldMenu mainMenu;
-    public bool canSpawn,isMainMenu;
+    public InWorldMenu mainMenu,otherSwipeMenu;
+    public bool canSpawn,isMainMenu,isSwipeMenu;
     public Material pressedColor,notPressedColor;
     public float rotSpeed;
+    public Vector3 posOfEnteredHand; //check the pos to see if it swiped left or right
     // Start is called before the first frame update
     void Start()
     {
@@ -141,7 +142,7 @@ public class InWorldMenu : MonoBehaviour
                 {
                     mainMenu.canSpawn = false;
 
-                    GameObject clone = Instantiate(realObject, spawnSpot.transform.position, transform.rotation) as GameObject;
+                   // GameObject clone = Instantiate(realObject, spawnSpot.transform.position, transform.rotation) as GameObject;
                     displayedObject.transform.parent = null;
                     displayedObject.GetComponent<Rigidbody>().isKinematic = false;
                     displayedObject.transform.localScale = new Vector3(displayedObject.transform.localScale.x / 0.3f, displayedObject.transform.localScale.y / 0.3f, displayedObject.transform.localScale.z / 0.3f);
@@ -195,12 +196,23 @@ public class InWorldMenu : MonoBehaviour
     }
     public void OnColliderEventHoverEnter(ColliderHoverEventData eventData)
     {
+        Debug.Log("enter: " + (posOfEnteredHand - (eventData.eventCaster.transform.position - transform.position)).magnitude);
+       // if (isSwipeMenu == true) { posOfEnteredHand = eventData.eventCaster.transform.position - transform.position; }
        
         canSpawn = true;
     }
 
     public void OnColliderEventHoverExit(ColliderHoverEventData eventData)
     {
+        if (isSwipeMenu == true) {
+            if (otherSwipeMenu.canSpawn == true)
+            { mainMenu.UpdateMenuDisplayed(swipeDirection); }
+           // Debug.Log("exit: " + (posOfEnteredHand - (eventData.eventCaster.transform.position - transform.position)).magnitude);
+           // if ((posOfEnteredHand - (eventData.eventCaster.transform.position - transform.position)).magnitude > 0.2f)
+          //  { UpdateMenuDisplayed((int)Mathf.Sign(posOfEnteredHand.x - eventData.eventCaster.transform.position.x)); }
+          //  posOfEnteredHand = Vector3.zero;
+
+        }
         canSpawn = false;
     }
 }
