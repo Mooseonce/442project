@@ -42,6 +42,7 @@ public class Vcr : MonoBehaviour
                 {
                     enableEnviromentObjects = true;
                     lastLoadedCart = other.gameObject;
+                    other.transform.rotation = transform.rotation;
                     oldEnviroment = activeEnviroment;
                     activeEnviroment = enviromentsToLoad[other.GetComponent<Cartridge>().value];
                     visualIndicator.GetComponent<Renderer>().material = other.GetComponent<Cartridge>().color;

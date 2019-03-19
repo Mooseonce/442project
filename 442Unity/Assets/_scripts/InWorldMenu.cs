@@ -117,7 +117,7 @@ public class InWorldMenu : MonoBehaviour
             displayedObject.GetComponent<Rigidbody>().isKinematic = false;
             displayedObject.transform.localScale = new Vector3(displayedObject.transform.localScale.x / 0.3f, displayedObject.transform.localScale.y / 0.3f, displayedObject.transform.localScale.z / 0.3f);
             buttonPressed.displayedObject = null;
-            buttonPressed.SetMenuItem(realObject);
+           // buttonPressed.SetMenuItem(realObject);
         }
     }
 
@@ -200,12 +200,13 @@ public class InWorldMenu : MonoBehaviour
        // if (isSwipeMenu == true) { posOfEnteredHand = eventData.eventCaster.transform.position - transform.position; }
        
         canSpawn = true;
+        if (isMainMenu == true) { UpdateMenuDisplayed(0); }
     }
 
     public void OnColliderEventHoverExit(ColliderHoverEventData eventData)
     {
         if (isSwipeMenu == true) {
-            if (otherSwipeMenu.canSpawn == true)
+            if (otherSwipeMenu.canSpawn == true && mainMenu.canSpawn == true)
             { mainMenu.UpdateMenuDisplayed(swipeDirection); }
            // Debug.Log("exit: " + (posOfEnteredHand - (eventData.eventCaster.transform.position - transform.position)).magnitude);
            // if ((posOfEnteredHand - (eventData.eventCaster.transform.position - transform.position)).magnitude > 0.2f)

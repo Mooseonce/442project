@@ -8,6 +8,8 @@ public class LegoPiece : MonoBehaviour
    
 {
     public GameObject currentParentPiece,prefabParentPiece,possibleConnection;//for when touching a piece it could connect to
+    public int currentSizeChange, currentSizeChangeVert, maxSizeChange;
+    public bool canChangeSize, canChangeSizeVert; // only grow once per axis change as to not grow out of control
     // Start is called before the first frame update
     void Start()
     {
@@ -17,7 +19,35 @@ public class LegoPiece : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (Input.GetAxis("Horizontal") != 0 && GetComponent<Collider>().isTrigger == true) {
+            int posOrNeg = (int)Mathf.Sign(Input.GetAxis("Horizontal"));
+            if (canChangeSize == true && currentSizeChange !=  posOrNeg * maxSizeChange) {
+                canChangeSize = false;
+                if (posOrNeg == -1)
+                { transform.localScale = new Vector3(transform.localScale.x / 1.1f, transform.localScale.y, transform.localScale.z / 1.1f);}
+                else { transform.localScale = new Vector3(transform.localScale.x * 1.1f, transform.localScale.y, transform.localScale.z * 1.1f); }
+                
+                currentSizeChange += posOrNeg;
+                }
+
+        }
+        else { canChangeSize = true; }
+
+        if (Input.GetAxis("Vertical") != 0 && GetComponent<Collider>().isTrigger == true)
+        {
+            int posOrNeg = (int)Mathf.Sign(Input.GetAxis("Horizontal"));
+            if (canChangeSizeVert == true && currentSizeChangeVert != posOrNeg * maxSizeChange)
+            {
+                canChangeSizeVert = false;
+                if (posOrNeg == -1)
+                { transform.localScale = new Vector3(transform.localScale.x , transform.localScale.y / 1.1f, transform.localScale.z ); }
+                else { transform.localScale = new Vector3(transform.localScale.x , transform.localScale.y * 1.1f, transform.localScale.z ); }
+
+                currentSizeChangeVert += posOrNeg;
+            }
+
+        }
+        else { canChangeSizeVert = true; }
     }
     public void SetTrigger() {
         GetComponent<Collider>().isTrigger = true;
