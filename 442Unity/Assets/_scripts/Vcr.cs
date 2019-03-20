@@ -5,13 +5,21 @@ using UnityEngine;
 public class Vcr : MonoBehaviour
 {
     public List<GameObject> enviromentsToLoad;
-    public GameObject spawnParent,visualIndicator,lastLoadedCart,activeEnviroment,oldEnviroment;
+    public GameObject spawnParent,visualIndicator,lastLoadedCart,activeEnviroment,oldEnviroment,blankEnviroment;
     public List<Transform> enviromentPositions;
+    public Dictionary<Material, GameObject> possibleEnviroments;
+    public List<Material> usedColors, unusedColors;
     public float loadTime,speed;
     public bool enableEnviromentObjects; //for when it has moved into place to avoid collisions of momentuem from the switch
     // Start is called before the first frame update
     void Start()
     {
+        possibleEnviroments = new Dictionary<Material, GameObject>();
+        foreach (GameObject go in enviromentsToLoad)
+        {
+            possibleEnviroments.Add(go.GetComponent<Enviroment>().blankwall.GetComponent<Renderer>().material, go);
+
+        }
         
     }
 
@@ -37,19 +45,49 @@ public class Vcr : MonoBehaviour
     {
         if (other.gameObject != lastLoadedCart && other.GetComponent<Cartridge>() != null)
         {
-            if (other.GetComponent<Cartridge>().type == 0)//0 hoops with launcher,1: basketball, 2: launcher with cubes to knockover
-            { if (other.GetComponent<Cartridge>().value < enviromentsToLoad.Count)
+            if (other.GetComponent<Cartridge>().type == 0)
+            {
+
+                //if (other.GetComponent<Cartridge>().value < enviromentsToLoad.Count)//0 hoops with launcher,1: basketball, 2: launcher with cubes to knockover
+                //{
+                //    enableEnviromentObjects = true;
+                //    lastLoadedCart = other.gameObject;
+                //    other.transform.rotation = transform.rotation;
+                //    oldEnviroment = activeEnviroment;
+                //    activeEnviroment = enviromentsToLoad[other.GetComponent<Cartridge>().value];
+                //    visualIndicator.GetComponent<Renderer>().material = other.GetComponent<Cartridge>().color;
+                //    foreach (Transform go in spawnParent.transform) { Destroy(go.gameObject); }
+                //}
+
+                if (possibleEnviroments.ContainsKey(other.GetComponent<Cartridge>().colorIndicator.GetComponent<Renderer>().material))
                 {
                     enableEnviromentObjects = true;
                     lastLoadedCart = other.gameObject;
                     other.transform.rotation = transform.rotation;
                     oldEnviroment = activeEnviroment;
-                    activeEnviroment = enviromentsToLoad[other.GetComponent<Cartridge>().value];
-                    visualIndicator.GetComponent<Renderer>().material = other.GetComponent<Cartridge>().color;
+                    activeEnviroment = possibleEnviroments[other.GetComponent<Cartridge>().colorIndicator.GetComponent<Renderer>().material];
+                    visualIndicator.GetComponent<Renderer>().material = other.GetComponent<Cartridge>().colorIndicator.GetComponent<Renderer>().material;
                     foreach (Transform go in spawnParent.transform) { Destroy(go.gameObject); }
                 }
+                else
+                {
+                    GameObject clone = Instantiate(blankEnviroment, blankEnviroment.transform.position, blankEnviroment.transform.rotation) as GameObject;
+                    clone.GetComponent<Enviroment>().blankwall.GetComponent<Renderer>().material = other.GetComponent<Cartridge>().colorIndicator.GetComponent<Renderer>().material;
+                    possibleEnviroments.Add(other.GetComponent<Cartridge>().colorIndicator.GetComponent<Renderer>().material, clone);
+
+                    enableEnviromentObjects = true;
+                    lastLoadedCart = other.gameObject;
+                    other.transform.rotation = transform.rotation;
+                    oldEnviroment = activeEnviroment;
+                    activeEnviroment = possibleEnviroments[other.GetComponent<Cartridge>().colorIndicator.GetComponent<Renderer>().material];
+                    visualIndicator.GetComponent<Renderer>().material = other.GetComponent<Cartridge>().colorIndicator.GetComponent<Renderer>().material;
+                    foreach (Transform go in spawnParent.transform) { Destroy(go.gameObject); }
+
+                }
+
 
             }
         }
+        else { if (other.GetComponent<Rigidbody>() != null) { other.GetComponent<Rigidbody>().AddForce(transform.right * Time.deltaTime * -150.0f,ForceMode.Impulse); } }
     }
 }

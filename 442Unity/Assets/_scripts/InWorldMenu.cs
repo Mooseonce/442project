@@ -196,23 +196,25 @@ public class InWorldMenu : MonoBehaviour
     }
     public void OnColliderEventHoverEnter(ColliderHoverEventData eventData)
     {
-        Debug.Log("enter: " + (posOfEnteredHand - (eventData.eventCaster.transform.position - transform.position)).magnitude);
+        //Debug.Log("enter: " + (posOfEnteredHand - (eventData.eventCaster.transform.position - transform.position)).magnitude);
        // if (isSwipeMenu == true) { posOfEnteredHand = eventData.eventCaster.transform.position - transform.position; }
        
         canSpawn = true;
-        if (isMainMenu == true) { UpdateMenuDisplayed(0); }
+        if (isMainMenu == true && subObjects.active == true) { UpdateMenuDisplayed(0); }
     }
 
     public void OnColliderEventHoverExit(ColliderHoverEventData eventData)
     {
-        if (isSwipeMenu == true) {
-            if (otherSwipeMenu.canSpawn == true && mainMenu.canSpawn == true)
-            { mainMenu.UpdateMenuDisplayed(swipeDirection); }
-           // Debug.Log("exit: " + (posOfEnteredHand - (eventData.eventCaster.transform.position - transform.position)).magnitude);
-           // if ((posOfEnteredHand - (eventData.eventCaster.transform.position - transform.position)).magnitude > 0.2f)
-          //  { UpdateMenuDisplayed((int)Mathf.Sign(posOfEnteredHand.x - eventData.eventCaster.transform.position.x)); }
-          //  posOfEnteredHand = Vector3.zero;
-
+        if (isSwipeMenu == true && gameObject.active == true) {
+            if (otherSwipeMenu != null && mainMenu != null)
+            {
+                if (otherSwipeMenu.canSpawn == true && mainMenu.canSpawn == true)
+                { mainMenu.UpdateMenuDisplayed(swipeDirection); }
+                // Debug.Log("exit: " + (posOfEnteredHand - (eventData.eventCaster.transform.position - transform.position)).magnitude);
+                // if ((posOfEnteredHand - (eventData.eventCaster.transform.position - transform.position)).magnitude > 0.2f)
+                //  { UpdateMenuDisplayed((int)Mathf.Sign(posOfEnteredHand.x - eventData.eventCaster.transform.position.x)); }
+                //  posOfEnteredHand = Vector3.zero;
+            }
         }
         canSpawn = false;
     }

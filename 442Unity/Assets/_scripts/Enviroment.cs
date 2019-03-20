@@ -5,6 +5,7 @@ using UnityEngine;
 public class Enviroment : MonoBehaviour
 {
     public List<GameObject> objectToEnableOnSetup;
+    public GameObject blankwall;
     // Start is called before the first frame update
     void Start()
     {

@@ -7,6 +7,7 @@ public class Lever : MonoBehaviour
     public bool on,debugbool;
     public Material onColor, offColor;
     public GameObject ofOffLightObject,grabberHandle,visualHandle; //has grab script, visual handle is jointed to this
+
     // Start is called before the first frame update
     void Start()
     {

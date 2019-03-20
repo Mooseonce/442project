@@ -68,9 +68,17 @@ public class LegoPiece : MonoBehaviour
         {
             GameObject clone = transform.GetChild(0).gameObject;//Instantiate(gameObject, transform.position, transform.rotation) as GameObject;
             clone.layer = 9;
-
+            if (possibleConnection.transform.parent != null) {
+                if (possibleConnection.transform.parent.name == "ContructedObjectParent(Clone)")
+                {
+                    transform.GetChild(0).GetComponent<Collider>().isTrigger = false;
+                    transform.GetChild(0).GetComponent<Collider>().enabled = true;
+                    clone.transform.parent = possibleConnection.transform.parent;
+                    return;
+                }
+            }
           
-            if (possibleConnection.transform.parent.name != "ContructedObjectParent(Clone)" && possibleConnection.name != "ContructedObjectParent(Clone)")
+            if (possibleConnection.name != "ContructedObjectParent(Clone)")
             {
                 // currentParentPiece = possibleConnection.GetComponent<LegoPiece>().currentParentPiece;
                 // GetComponent<Rigidbody>().isKinematic = true;
@@ -93,20 +101,20 @@ public class LegoPiece : MonoBehaviour
             }
             else
             {
-                if (possibleConnection.name == "ContructedObjectParent(Clone)")
-                {
-                    transform.GetChild(0).GetComponent<Collider>().isTrigger = false;
-                    transform.GetChild(0).GetComponent<Collider>().enabled = true;
-                    clone.transform.parent = possibleConnection.transform;
+               // if (possibleConnection.name == "ContructedObjectParent(Clone)")
+               // {
+               //     transform.GetChild(0).GetComponent<Collider>().isTrigger = false;
+               //     transform.GetChild(0).GetComponent<Collider>().enabled = true;
+               //     clone.transform.parent = possibleConnection.transform;
                    
-                }
-                else
-                {
+               // }
+              //  else
+                //{
                     transform.GetChild(0).GetComponent<Collider>().isTrigger = false;
                     transform.GetChild(0).GetComponent<Collider>().enabled = true;
                     clone.transform.parent = possibleConnection.transform.parent;
                     
-                }
+               // }
                
                 //Destroy(this.gameObject);
                // gameObject.active = false;
@@ -118,6 +126,9 @@ public class LegoPiece : MonoBehaviour
                 // possibleConnection.GetComponent<FixedJoint>().connectedBody = currentParentPiece.GetComponent<Rigidbody>();
             }
             GetComponent<Collider>().enabled = false;
+            GetComponent<Renderer>().enabled = false;
+          //  Destroy(this.gameObject);
+            
         }
         GetComponent<Collider>().isTrigger = false;
 
