@@ -66,74 +66,83 @@ public class LegoPiece : MonoBehaviour
     public void SetSolid() {
         if (possibleConnection != null)
         {
-            GameObject clone = transform.GetChild(0).gameObject;//Instantiate(gameObject, transform.position, transform.rotation) as GameObject;
-            clone.layer = 9;
-            if (possibleConnection.transform.parent != null) {
-                if (possibleConnection.transform.parent.name == "ContructedObjectParent(Clone)")
+            if (transform.childCount > 0)
+            {
+                GameObject clone = transform.GetChild(0).gameObject;//Instantiate(gameObject, transform.position, transform.rotation) as GameObject;
+                clone.layer = 9;
+                if (possibleConnection.transform.parent != null)
                 {
-                    transform.GetChild(0).GetComponent<Collider>().isTrigger = false;
-                    transform.GetChild(0).GetComponent<Collider>().enabled = true;
-                    clone.transform.parent = possibleConnection.transform.parent;
-                    return;
+                    if (possibleConnection.transform.parent.name == "ContructedObjectParent(Clone)")
+                    {
+                        clone.transform.parent = possibleConnection.transform.parent;
+                        clone.GetComponent<Collider>().isTrigger = false;
+                        clone.GetComponent<Collider>().enabled = true;
+                        return;
+                    }
                 }
-            }
-          
-            if (possibleConnection.name != "ContructedObjectParent(Clone)")
-            {
-                // currentParentPiece = possibleConnection.GetComponent<LegoPiece>().currentParentPiece;
-                // GetComponent<Rigidbody>().isKinematic = true;
-                GameObject clone2 = Instantiate(prefabParentPiece, transform.position, transform.rotation) as GameObject;
-                transform.GetChild(0).GetComponent<Collider>().enabled = true;
 
-                clone.transform.parent = clone2.transform;
-                possibleConnection.transform.GetChild(0).gameObject.layer = 9;
-                possibleConnection.transform.GetChild(0).GetComponent<Collider>().enabled = true;
-                possibleConnection.transform.GetChild(0).parent = clone2.transform;
-                clone2.GetComponent<Rigidbody>().useGravity = true;
-             //   Destroy(possibleConnection);
-                // Destroy(this.gameObject);
-                //possibleConnection.active = false;
-               // gameObject.active = false;
+                if (possibleConnection.name != "ContructedObjectParent(Clone)")
+                {
+                    // currentParentPiece = possibleConnection.GetComponent<LegoPiece>().currentParentPiece;
+                    // GetComponent<Rigidbody>().isKinematic = true;
+                    GameObject clone2 = Instantiate(prefabParentPiece, transform.position, transform.rotation) as GameObject;
 
-                // gameObject.AddComponent<FixedJoint>();
-                // GetComponent<FixedJoint>().connectedBody = currentParentPieceGetComponent<Rigidbody>();
-                // GetComponent<FixedJoint>().connectedBody = currentParentPiece.GetComponent<Rigidbody>();
-            }
-            else
-            {
-               // if (possibleConnection.name == "ContructedObjectParent(Clone)")
-               // {
-               //     transform.GetChild(0).GetComponent<Collider>().isTrigger = false;
-               //     transform.GetChild(0).GetComponent<Collider>().enabled = true;
-               //     clone.transform.parent = possibleConnection.transform;
-                   
-               // }
-              //  else
-                //{
-                    transform.GetChild(0).GetComponent<Collider>().isTrigger = false;
-                    transform.GetChild(0).GetComponent<Collider>().enabled = true;
+                    clone.transform.parent = clone2.transform;
+                    clone.GetComponent<Collider>().enabled = true;
+                    if (possibleConnection.transform.childCount > 0)
+                    {
+                        GameObject clone3 = possibleConnection.transform.GetChild(0).gameObject;
+                        clone3.transform.parent = clone2.transform;
+                        clone3.gameObject.layer = 9;
+                        clone3.GetComponent<Collider>().enabled = true;
+                    }
+                    clone2.GetComponent<Rigidbody>().useGravity = true;
+                    //   Destroy(possibleConnection);
+                    // Destroy(this.gameObject);
+                    //possibleConnection.active = false;
+                    // gameObject.active = false;
+
+                    // gameObject.AddComponent<FixedJoint>();
+                    // GetComponent<FixedJoint>().connectedBody = currentParentPieceGetComponent<Rigidbody>();
+                    // GetComponent<FixedJoint>().connectedBody = currentParentPiece.GetComponent<Rigidbody>();
+                }
+                else
+                {
+                    // if (possibleConnection.name == "ContructedObjectParent(Clone)")
+                    // {
+                    //     transform.GetChild(0).GetComponent<Collider>().isTrigger = false;
+                    //     transform.GetChild(0).GetComponent<Collider>().enabled = true;
+                    //     clone.transform.parent = possibleConnection.transform;
+
+                    // }
+                    //  else
+                    //{
                     clone.transform.parent = possibleConnection.transform.parent;
-                    
-               // }
-               
-                //Destroy(this.gameObject);
-               // gameObject.active = false;
-                // gameObject.AddComponent<FixedJoint>();
-                //   GetComponent<FixedJoint>().connectedBody = currentParentPiece.GetComponent<Rigidbody>();
-                // GetComponent<Rigidbody>().isKinematic = true;
-                // possibleConnection.GetComponent<Rigidbody>().isKinematic = true;
-                //  possibleConnection.AddComponent<FixedJoint>();
-                // possibleConnection.GetComponent<FixedJoint>().connectedBody = currentParentPiece.GetComponent<Rigidbody>();
+                    clone.GetComponent<Collider>().isTrigger = false;
+                    clone.GetComponent<Collider>().enabled = true;
+                   
+
+                    // }
+
+                    //Destroy(this.gameObject);
+                    // gameObject.active = false;
+                    // gameObject.AddComponent<FixedJoint>();
+                    //   GetComponent<FixedJoint>().connectedBody = currentParentPiece.GetComponent<Rigidbody>();
+                    // GetComponent<Rigidbody>().isKinematic = true;
+                    // possibleConnection.GetComponent<Rigidbody>().isKinematic = true;
+                    //  possibleConnection.AddComponent<FixedJoint>();
+                    // possibleConnection.GetComponent<FixedJoint>().connectedBody = currentParentPiece.GetComponent<Rigidbody>();
+                }
+                GetComponent<Collider>().enabled = false;
+                GetComponent<Renderer>().enabled = false;
+                //  Destroy(this.gameObject);
+
             }
-            GetComponent<Collider>().enabled = false;
-            GetComponent<Renderer>().enabled = false;
-          //  Destroy(this.gameObject);
-            
         }
         GetComponent<Collider>().isTrigger = false;
 
     }
-    public void OnTriggerEnter(Collider other) { if (other.transform.tag == "Lego") { possibleConnection = other.gameObject; } }
+    public void OnTriggerEnter(Collider other) { if (other.transform.tag == "Lego" && GetComponent<Collider>().isTrigger == true) { possibleConnection = other.gameObject; } }
     public void OnTriggerExit(Collider other) { if (other.gameObject == possibleConnection) { possibleConnection = null; } }
 
    
