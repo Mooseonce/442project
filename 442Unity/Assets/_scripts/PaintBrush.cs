@@ -22,6 +22,7 @@ public class PaintBrush : MonoBehaviour
     {
         if (other.tag == "PaintColor")
         {
+           
             currentColor = other.GetComponent<Renderer>().material;
             GetComponent<Renderer>().material = currentColor;
 
@@ -29,7 +30,8 @@ public class PaintBrush : MonoBehaviour
         }
         if (other.tag == "Paintable")
         {
-           other.GetComponent<Renderer>().material = currentColor;
+            other.GetComponent<MeshRenderer>().enabled = true;
+            other.GetComponent<Renderer>().material = currentColor;
            
 
 
