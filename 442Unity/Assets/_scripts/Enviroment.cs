@@ -5,7 +5,9 @@ using UnityEngine;
 public class Enviroment : MonoBehaviour
 {
     public List<GameObject> objectToEnableOnSetup;
+    public Transform colorObjs,playerSpawnedObjects; // objects to change the material of to indicate which room this is
     public GameObject blankwall;
+    public Material roomColor;
     // Start is called before the first frame update
     void Start()
     {
@@ -23,5 +25,19 @@ public class Enviroment : MonoBehaviour
     {
         foreach (GameObject go in objectToEnableOnSetup)
         { go.active = true; }
+        ToggleSpawnedObjects(true);
+
+
+    }
+    public void ToggleSpawnedObjects(bool onOrOff)
+    {
+        playerSpawnedObjects.gameObject.active = onOrOff;
+    }
+    public void SetColor(Material newColor)
+    {
+
+        roomColor = newColor;
+        foreach (Transform go2 in colorObjs)
+        { go2.GetComponent<Renderer>().material = roomColor; }
     }
 }

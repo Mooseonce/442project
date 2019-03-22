@@ -86,6 +86,11 @@ public class LegoPiece : MonoBehaviour
                     // currentParentPiece = possibleConnection.GetComponent<LegoPiece>().currentParentPiece;
                     // GetComponent<Rigidbody>().isKinematic = true;
                     GameObject clone2 = Instantiate(prefabParentPiece, transform.position, transform.rotation) as GameObject;
+                    GameObject roomManager = GameObject.Find("RoomManager");
+                    if (roomManager != null)
+                    {
+                        clone2.transform.parent = roomManager.GetComponent<RoomManager>().activeEnviroment.playerSpawnedObjects;
+                    }
 
                     clone.transform.parent = clone2.transform;
                     clone.GetComponent<Collider>().enabled = true;

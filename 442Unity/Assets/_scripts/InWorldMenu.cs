@@ -19,6 +19,7 @@ public class InWorldMenu : MonoBehaviour
     public Material pressedColor,notPressedColor;
     public float rotSpeed;
     public Vector3 posOfEnteredHand; //check the pos to see if it swiped left or right
+    public Transform currentEnviromentSpawnParent;
     // Start is called before the first frame update
     void Start()
     {
@@ -142,10 +143,19 @@ public class InWorldMenu : MonoBehaviour
                 {
                     mainMenu.canSpawn = false;
 
-                   // GameObject clone = Instantiate(realObject, spawnSpot.transform.position, transform.rotation) as GameObject;
+                    // GameObject clone = Instantiate(realObject, spawnSpot.transform.position, transform.rotation) as GameObject;
                     displayedObject.transform.parent = null;
+                    GameObject roomManager = GameObject.Find("RoomManager");
+                    if (roomManager != null)
+                    {
+                        displayedObject.transform.parent = roomManager.GetComponent<RoomManager>().activeEnviroment.playerSpawnedObjects;
+                    }
+                      
+
+
                     displayedObject.GetComponent<Rigidbody>().isKinematic = false;
                     displayedObject.transform.localScale = new Vector3(displayedObject.transform.localScale.x / 0.3f, displayedObject.transform.localScale.y / 0.3f, displayedObject.transform.localScale.z / 0.3f);
+
                     displayedObject = null;
                     SetMenuItem(realObject);
                     //clone.GetComponent<Rigidbody>().useGravity = false;
