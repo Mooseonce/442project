@@ -7,7 +7,7 @@ public class RoomBuilder : MonoBehaviour
     public GameObject itemSelectorDial,debugPrefab, debugPrefabVisual,activeVisualIndicator;
     public List<GameObject> spawnableObjects, tempSpawnableObjects;
     public int currentItemSelected;
-    public bool canSpawn;
+    public bool canSpawn,isOn;
     public RoomManager roomManager;
     // Start is called before the first frame update
     void Start()
@@ -18,35 +18,42 @@ public class RoomBuilder : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-      
-       // currentItemSelected = Mathf.FloorToInt(itemSelectorDial.transform.localEulerAngles.x / (360 / spawnableObjects.Count));
-        Debug.Log( ":  Local Rot" + itemSelectorDial.transform.localEulerAngles.x + " : " + itemSelectorDial.transform.rotation.x + " : " + itemSelectorDial.transform.localRotation.x + " : " + currentItemSelected);
-        //Debug.Log("Local mod:  " + Mathf.FloorToInt( itemSelectorDial.transform.localEulerAngles.x) / (360 / spawnableObjects.Count));
-        if (Input.GetAxis("Vertical") != 0 )
+        if (isOn == true)
         {
-            RayForward();
-            if (activeVisualIndicator != null)
+            // currentItemSelected = Mathf.FloorToInt(itemSelectorDial.transform.localEulerAngles.x / (360 / spawnableObjects.Count));
+            // HTC_VIU_UnityAxis3
+           // if (Input.GetAxis("Vertical") != 0)
+
+                if (Input.GetAxis("HTC_VIU_UnityAxis3") != 0)
             {
-                activeVisualIndicator.transform.Rotate(0, Input.GetAxis("Horizontal"), 0);
-            }
+                RayForward();
+                if (activeVisualIndicator != null)
+                {
+                    activeVisualIndicator.transform.Rotate(activeVisualIndicator.transform.up * Input.GetAxis("Horizontal"));
+                    activeVisualIndicator.transform.Rotate(activeVisualIndicator.transform.right * Input.GetAxis("Vertical"));
+                    // activeVisualIndicator.transform.Rotate(0, Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+                }
 
 
                 if (Input.GetKeyDown(KeyCode.JoystickButton5) || Input.GetKeyDown(KeyCode.JoystickButton4)) { Destroy(activeVisualIndicator); }// right and left grip buttons
-        }
-        
-        if (Input.GetAxis("Vertical") == 0)
-        {
-            if (activeVisualIndicator != null)
+            }
+
+            if (Input.GetAxis("HTC_VIU_UnityAxis3") == 0)
             {
-                GameObject clone = Instantiate(spawnableObjects[currentItemSelected], activeVisualIndicator.transform.position, activeVisualIndicator.transform.rotation);
-                clone.transform.parent = roomManager.activeEnviroment.playerSpawnedObjects;
-                //clone.transform.LookAt(new Vector3(transform.position.x, clone.transform.position.y, transform.position.z));
-                Destroy(activeVisualIndicator);
+                if (activeVisualIndicator != null)
+                {
+                    GameObject clone = Instantiate(spawnableObjects[currentItemSelected], activeVisualIndicator.transform.position, activeVisualIndicator.transform.rotation);
+                    clone.transform.parent = roomManager.activeEnviroment.playerSpawnedObjects;
+                    //clone.transform.LookAt(new Vector3(transform.position.x, clone.transform.position.y, transform.position.z));
+                    Destroy(activeVisualIndicator);
+
+                }
+                canSpawn = true;
+
+
 
             }
-            canSpawn = true;
         }
-
     }
     public void RayForward()
     {
