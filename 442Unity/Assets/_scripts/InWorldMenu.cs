@@ -61,12 +61,15 @@ public class InWorldMenu : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (menuType == 0) { rootObject.transform.position = sitSpot.transform.position; rootObject.transform.rotation = sitSpot.transform.rotation; }
+        if (menuType == 0) {
+            rootObject.transform.position = sitSpot.transform.position; rootObject.transform.rotation = sitSpot.transform.rotation;
+            }
         if (displayedObject != null) { displayedObject.transform.position = transform.position; displayedObject.transform.rotation = transform.rotation; }
         if (Input.GetKeyDown(KeyCode.A) && menuType == 0)
         { UpdateMenuDisplayed(-1); }
         if (Input.GetKeyDown(KeyCode.D) && menuType == 0)
         { UpdateMenuDisplayed(1); }
+       
         transform.Rotate(0, rotSpeed, 0);
     }
     public void ToggleOn()
