@@ -7,7 +7,7 @@ public class Vcr : MonoBehaviour
     public List<GameObject> enviromentsToLoad;
     public GameObject spawnParent,visualIndicator,lastLoadedCart,activeEnviroment,oldEnviroment,blankEnviroment;
     public List<Transform> enviromentPositions;
-    public Dictionary<Material, GameObject> possibleEnviroments;
+    public Dictionary<Color, GameObject> possibleEnviroments;
     public List<Material> usedColors, unusedColors;
     public float loadTime,speed;
     public bool enableEnviromentObjects; //for when it has moved into place to avoid collisions of momentuem from the switch
@@ -15,10 +15,10 @@ public class Vcr : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        possibleEnviroments = new Dictionary<Material, GameObject>();
+        possibleEnviroments = new Dictionary<Color, GameObject>();
         foreach (GameObject go in enviromentsToLoad)
         {
-            possibleEnviroments.Add(go.GetComponent<Enviroment>().roomColor, go);
+            possibleEnviroments.Add(go.GetComponent<Enviroment>().roomColor.color, go);
 
         }
         
@@ -56,7 +56,7 @@ public class Vcr : MonoBehaviour
 
                 
 
-                if (possibleEnviroments.ContainsKey(other.GetComponent<Cartridge>().colorIndicator.GetComponent<Renderer>().material))
+                if (possibleEnviroments.ContainsKey(other.GetComponent<Cartridge>().colorIndicator.GetComponent<Renderer>().material.color))
                 {
                     enableEnviromentObjects = true;
                     lastLoadedCart = other.gameObject;
@@ -64,7 +64,9 @@ public class Vcr : MonoBehaviour
                     oldEnviroment = activeEnviroment;
                     //oldEnviroment.GetComponent<Enviroment>().ToggleSpawnedObjects(false);
                   
-                    activeEnviroment = possibleEnviroments[other.GetComponent<Cartridge>().colorIndicator.GetComponent<Renderer>().material];
+                    activeEnviroment = possibleEnviroments[other.GetComponent<Cartridge>().colorIndicator.GetComponent<Renderer>().material.color];
+
+
                     visualIndicator.GetComponent<Renderer>().material = other.GetComponent<Cartridge>().colorIndicator.GetComponent<Renderer>().material;
                     foreach (Transform go in spawnParent.transform) { Destroy(go.gameObject); }
                 }
@@ -74,13 +76,13 @@ public class Vcr : MonoBehaviour
                     clone.GetComponent<Enviroment>().SetColor(other.GetComponent<Cartridge>().colorIndicator.GetComponent<Renderer>().material);
 
                     //clone.GetComponent<Enviroment>().blankwall.GetComponent<Renderer>().material = other.GetComponent<Cartridge>().colorIndicator.GetComponent<Renderer>().material;
-                    possibleEnviroments.Add(other.GetComponent<Cartridge>().colorIndicator.GetComponent<Renderer>().material, clone);
+                    possibleEnviroments.Add(other.GetComponent<Cartridge>().colorIndicator.GetComponent<Renderer>().material.color, clone);
 
                     enableEnviromentObjects = true;
                     lastLoadedCart = other.gameObject;
                     other.transform.rotation = transform.rotation;
                     oldEnviroment = activeEnviroment;
-                    activeEnviroment = possibleEnviroments[other.GetComponent<Cartridge>().colorIndicator.GetComponent<Renderer>().material];
+                    activeEnviroment = possibleEnviroments[other.GetComponent<Cartridge>().colorIndicator.GetComponent<Renderer>().material.color];
                    
                     visualIndicator.GetComponent<Renderer>().material = other.GetComponent<Cartridge>().colorIndicator.GetComponent<Renderer>().material;
                     foreach (Transform go in spawnParent.transform) { Destroy(go.gameObject); }
