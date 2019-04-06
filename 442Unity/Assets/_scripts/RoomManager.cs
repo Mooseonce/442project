@@ -16,6 +16,6 @@ public class RoomManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKey(KeyCode.JoystickButton4) || Input.GetKey(KeyCode.JoystickButton5)) { dataPad.transform.position = player.transform.position; }
+       // if (Input.GetKey(KeyCode.JoystickButton4) || Input.GetKey(KeyCode.JoystickButton5)) { dataPad.transform.position = player.transform.position; }
     }
 }
