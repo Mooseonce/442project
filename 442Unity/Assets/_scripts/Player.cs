@@ -18,7 +18,7 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetAxis("HTC_VIU_UnityAxis20") != 0 && canChange == true)
+        if (Input.GetAxis("HTC_VIU_UnityAxis20") == 1 && canChange == true)
         {
             canChange = false;
             ChangeTool();
