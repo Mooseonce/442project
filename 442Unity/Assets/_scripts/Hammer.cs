@@ -33,7 +33,7 @@ public class Hammer : MonoBehaviour
                     if (col.gameObject.GetComponent<Rigidbody>().isKinematic == false)
                     {
                         col.gameObject.GetComponent<Rigidbody>().isKinematic = true;
-                        GameObject clone = Instantiate(nail, transform.position, transform.parent.rotation) as GameObject;
+                        GameObject clone = Instantiate(nail, col.contacts[0].point, transform.parent.rotation) as GameObject;
                         clone.GetComponent<Nail>().SetObject(col.gameObject);
                     }
                 }
