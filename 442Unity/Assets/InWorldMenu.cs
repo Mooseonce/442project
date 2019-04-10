@@ -151,7 +151,9 @@ public class InWorldMenu : MonoBehaviour
                     GameObject roomManager = GameObject.Find("RoomManager");
                     if (roomManager != null)
                     {
-                        displayedObject.transform.parent = roomManager.GetComponent<RoomManager>().activeEnviroment.playerSpawnedObjects;
+                        // displayedObject.transform.parent = roomManager.GetComponent<RoomManager>().activeEnviroment.playerSpawnedObjects;
+                        displayedObject.transform.parent = GameObject.Find("SpawnedObjectsParent").transform;
+
                     }
                       
 
