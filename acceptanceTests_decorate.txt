@@ -1,0 +1,33 @@
+
+
+While holding the construction ray
+pressing the right controller trigger 
+will display a buildable object
+
+While holding the right trigger while a buildable object is visible
+releasing the right trigger
+will place that buildable object in the world
+
+while holding the construction ray
+rotating the dial on it's left face
+results in a different object to appear during building
+
+While there are buildable objects in the world
+using the paintbrush on thatbuildable  object
+causes paint to appear on that buildable object.
+
+When there are buildable objects placed in the world
+Changing enviroments
+Causes the buildable objects to no longer be visible
+
+while holding the hammer object
+striking an object that is affected by gravity
+results in the object locking in place
+
+while holding the hammer object
+striking a nail
+causing the nail to dissappear and the object it is attached to fall to the ground
+
+At any point in the world
+swiping the right touch pad
+causes the right hand to switch to a new item

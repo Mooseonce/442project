@@ -8,10 +8,14 @@ public class Enviroment : MonoBehaviour
     public Transform colorObjs,playerSpawnedObjects; // objects to change the material of to indicate which room this is
     public GameObject blankwall;
     public Material roomColor;
+    public Color idColor;
     // Start is called before the first frame update
     void Start()
     {
-
+        if (roomColor != null)
+        {
+            idColor = roomColor.color;
+        }
     }
 
     // Update is called once per frame
@@ -37,7 +41,18 @@ public class Enviroment : MonoBehaviour
     {
 
         roomColor = newColor;
+        idColor = newColor.color;
         foreach (Transform go2 in colorObjs)
         { go2.GetComponent<Renderer>().material = roomColor; }
+    }
+    public void SetColorId(Color newColor)
+    {
+
+        idColor = newColor;
+        if (colorObjs != null)
+        {
+            foreach (Transform go2 in colorObjs)
+            { go2.GetComponent<Renderer>().material = roomColor; }
+        }
     }
 }

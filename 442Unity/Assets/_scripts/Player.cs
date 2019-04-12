@@ -18,12 +18,13 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetAxis("HTC_VIU_UnityAxis20") == 1 && canChange == true)
+        //axis 9 left trigger on vive
+        if (Input.GetAxis("HTC_VIU_UnityAxis4") > 0.5f && canChange == true)
         {
             canChange = false;
             ChangeTool();
         }
-        if (Input.GetAxis("HTC_VIU_UnityAxis20") == 0 )
+        if (Input.GetAxis("HTC_VIU_UnityAxis4") == 0 )
         {
             canChange = true;
            

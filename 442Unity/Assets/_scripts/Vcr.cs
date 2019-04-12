@@ -16,12 +16,14 @@ public class Vcr : MonoBehaviour
     void Start()
     {
         possibleEnviroments = new Dictionary<Color, GameObject>();
-        foreach (GameObject go in enviromentsToLoad)
+        if (enviromentsToLoad != null)
         {
-            possibleEnviroments.Add(go.GetComponent<Enviroment>().roomColor.color, go);
+            foreach (GameObject go in enviromentsToLoad)
+            {
+                possibleEnviroments.Add(go.GetComponent<Enviroment>().idColor, go);
 
+            }
         }
-        
     }
 
     // Update is called once per frame
@@ -47,51 +49,80 @@ public class Vcr : MonoBehaviour
     }
     public void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject != lastLoadedCart && other.GetComponent<Cartridge>() != null)
+        //check that the collision is a cartridge 
+        if ( other.GetComponent<Cartridge>() != null && other.gameObject != lastLoadedCart)
         {
             if (other.GetComponent<Cartridge>().type == 0)
             {
-
                 activeEnviroment.GetComponent<Enviroment>().ToggleSpawnedObjects(false);
-
-                
-
-                if (possibleEnviroments.ContainsKey(other.GetComponent<Cartridge>().colorIndicator.GetComponent<Renderer>().material.color))
-                {
-                    enableEnviromentObjects = true;
-                    lastLoadedCart = other.gameObject;
-                    other.transform.rotation = transform.rotation;
-                    oldEnviroment = activeEnviroment;
-                    //oldEnviroment.GetComponent<Enviroment>().ToggleSpawnedObjects(false);
-                  
-                    activeEnviroment = possibleEnviroments[other.GetComponent<Cartridge>().colorIndicator.GetComponent<Renderer>().material.color];
-
-
-                    visualIndicator.GetComponent<Renderer>().material = other.GetComponent<Cartridge>().colorIndicator.GetComponent<Renderer>().material;
-                    foreach (Transform go in spawnParent.transform) { Destroy(go.gameObject); }
-                }
-                else
-                {
-                    GameObject clone = Instantiate(blankEnviroment, blankEnviroment.transform.position, blankEnviroment.transform.rotation) as GameObject;
-                    clone.GetComponent<Enviroment>().SetColor(other.GetComponent<Cartridge>().colorIndicator.GetComponent<Renderer>().material);
-
-                    //clone.GetComponent<Enviroment>().blankwall.GetComponent<Renderer>().material = other.GetComponent<Cartridge>().colorIndicator.GetComponent<Renderer>().material;
-                    possibleEnviroments.Add(other.GetComponent<Cartridge>().colorIndicator.GetComponent<Renderer>().material.color, clone);
-
-                    enableEnviromentObjects = true;
-                    lastLoadedCart = other.gameObject;
-                    other.transform.rotation = transform.rotation;
-                    oldEnviroment = activeEnviroment;
-                    activeEnviroment = possibleEnviroments[other.GetComponent<Cartridge>().colorIndicator.GetComponent<Renderer>().material.color];
-                   
-                    visualIndicator.GetComponent<Renderer>().material = other.GetComponent<Cartridge>().colorIndicator.GetComponent<Renderer>().material;
-                    foreach (Transform go in spawnParent.transform) { Destroy(go.gameObject); }
-
-                }
-                roomManager.activeEnviroment = activeEnviroment.GetComponent<Enviroment>();
+                visualIndicator.GetComponent<Renderer>().material = other.GetComponent<Cartridge>().colorIndicator.GetComponent<Renderer>().material;
+                other.GetComponent<Cartridge>().idColor = other.GetComponent<Cartridge>().colorIndicator.GetComponent<Renderer>().material.color;
+                foreach (Transform go in spawnParent.transform) { Destroy(go.gameObject); }
+                ChangeEnviroment(other.gameObject);
 
             }
         }
         else { if (other.GetComponent<Rigidbody>() != null) { other.GetComponent<Rigidbody>().AddForce(transform.right * Time.deltaTime * -150.0f,ForceMode.Impulse); } }
     }
+
+    public void ChangeEnviroment(GameObject other)
+    {
+        //check  if the cart loaded is different than the previous one.
+        if (other.gameObject != lastLoadedCart)
+        {
+
+           
+
+
+
+            if (possibleEnviroments.ContainsKey(other.GetComponent<Cartridge>().getIdColor()))
+            {
+                Debug.Log("old enviroment : " + other.GetComponent<Cartridge>().getIdColor());
+
+                enableEnviromentObjects = true;
+                lastLoadedCart = other;
+                other.transform.rotation = transform.rotation;
+                oldEnviroment = activeEnviroment;
+                //oldEnviroment.GetComponent<Enviroment>().ToggleSpawnedObjects(false);
+
+                activeEnviroment = possibleEnviroments[other.GetComponent<Cartridge>().getIdColor()];
+
+
+                
+               
+            }
+            else
+            {
+                Debug.Log("new enviroment: " + other.GetComponent<Cartridge>().getIdColor());
+                if (blankEnviroment != null)
+                {
+                    GameObject clone = Instantiate(blankEnviroment, blankEnviroment.transform.position, blankEnviroment.transform.rotation) as GameObject;
+                    clone.GetComponent<Enviroment>().SetColor(other.GetComponent<Cartridge>().colorIndicator.GetComponent<Renderer>().material);
+                    possibleEnviroments.Add(other.GetComponent<Cartridge>().getIdColor(), clone);
+                }
+                //clone.GetComponent<Enviroment>().blankwall.GetComponent<Renderer>().material = other.GetComponent<Cartridge>().colorIndicator.GetComponent<Renderer>().material;
+                // possibleEnviroments.Add(other.GetComponent<Cartridge>().colorIndicator.GetComponent<Renderer>().material.color, clone);
+
+                enableEnviromentObjects = true;
+                lastLoadedCart = other;
+                other.transform.rotation = transform.rotation;
+                oldEnviroment = activeEnviroment;
+                activeEnviroment = possibleEnviroments[other.GetComponent<Cartridge>().getIdColor()];
+
+                visualIndicator.GetComponent<Renderer>().material = other.GetComponent<Cartridge>().colorIndicator.GetComponent<Renderer>().material;
+               // foreach (Transform go in spawnParent.transform) { Destroy(go.gameObject); }
+
+            }
+            if (roomManager != null) { roomManager.activeEnviroment = activeEnviroment.GetComponent<Enviroment>(); }
+           
+        }
+    }
+    public void AddToEnviromentList(Color colorId,GameObject newEnviroment)
+    {
+        if (possibleEnviroments == null)
+        { possibleEnviroments = new Dictionary<Color, GameObject>(); }
+        possibleEnviroments.Add(colorId, newEnviroment);
+    }
+    public GameObject GetActiveEnviroment()
+    { return activeEnviroment; }
 }
