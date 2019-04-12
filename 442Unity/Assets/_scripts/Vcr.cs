@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Vcr : MonoBehaviour
+public class Vcr : MonoBehaviour 
 {
     public List<GameObject> enviromentsToLoad;
     public GameObject spawnParent,visualIndicator,lastLoadedCart,activeEnviroment,oldEnviroment,blankEnviroment;
