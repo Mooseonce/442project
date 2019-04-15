@@ -6,12 +6,13 @@ public class PhysicsButton : MonoBehaviour
 {
     public float timer;
     public GameObject controlledObject;
-    public int value;
+    public int value, valueType;//value type for int/color/etc 
     public string messageToSend;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
@@ -24,11 +25,32 @@ public class PhysicsButton : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player" && timer <= 0)
         {
-
-            controlledObject.SendMessage(messageToSend, value);
+            SendActionOnCollision();
+            //controlledObject.SendMessage(messageToSend, value);
             //controlledObject.GetComponent<Cannon>().RotateCannon(value);
             timer = 0.1f; // to prevent the player from accidedntly double tapping.
         }
     }
 
-}
+    public void SendActionOnCollision()
+    {
+        switch (valueType)
+        {
+            //int type
+            case 0:
+                controlledObject.SendMessage(messageToSend, value);
+                break;
+            //color
+            case 1:
+                controlledObject.SendMessage(messageToSend, GetComponent<Renderer>().material.color);
+                break;
+            default:
+                break;
+                
+
+                }
+        }
+
+    }
+
+
