@@ -45,10 +45,10 @@ public class Model_Actions : MonoBehaviour
             case 2:
                 wingleft.GetComponent<Rigidbody>().AddForce(transform.forward * -100.0f * Time.deltaTime, ForceMode.Impulse);
                 wingright.GetComponent<Rigidbody>().AddForce(transform.forward * -100.0f * Time.deltaTime, ForceMode.Impulse);
-             
+                
                 break;
             case 3:
-                if (isOn == true) { isOn = false; } else { timer = timerCycle; isOn = true; }
+                if (isOn == true) { isOn = false; GetComponent<Model_Piece>().mainShip.GetComponent<Rigidbody>().useGravity = true; } else { timer = timerCycle; isOn = true; }
                 break;
             default:
                 Debug.Log("Default case");
@@ -73,12 +73,12 @@ public class Model_Actions : MonoBehaviour
             case 2:
                 wingleft.GetComponent<Rigidbody>().AddForce(transform.forward * -100.0f * Time.deltaTime, ForceMode.Impulse);
                 wingright.GetComponent<Rigidbody>().AddForce(transform.forward * -100.0f * Time.deltaTime, ForceMode.Impulse);
-             
+                GetComponent<Model_Piece>().mainShip.GetComponent<Rigidbody>().useGravity = false;
                 break;
             case 3:
                 wingleft.GetComponent<Rigidbody>().AddForce(transform.forward * -100.0f * Time.deltaTime, ForceMode.Impulse);
                 wingright.GetComponent<Rigidbody>().AddForce(transform.forward * -100.0f * Time.deltaTime, ForceMode.Impulse);
-             
+                GetComponent<Model_Piece>().mainShip.GetComponent<Rigidbody>().useGravity = false;
                 break;
             default:
 

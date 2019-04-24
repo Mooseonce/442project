@@ -50,13 +50,14 @@ namespace HTC.UnityPlugin.Vive
         {
             foreach (var cam in Camera.allCameras)
             {
-                if (!cam.enabled) { continue; }
+                
+              //  if (!cam.enabled) { continue; }
 #if UNITY_5_4_OR_NEWER
                 // try find vr camera eye
-                if (cam.stereoTargetEye != StereoTargetEyeMask.Both) { continue; }
+             //   if (cam.stereoTargetEye != StereoTargetEyeMask.Both) { continue; }
 #endif
-                pivot = cam.transform;
-                target = cam.transform.root == null ? cam.transform : cam.transform.root;
+              //  pivot = cam.transform;
+                //target = cam.transform.root == null ? cam.transform : cam.transform.root;
             }
         }
 
