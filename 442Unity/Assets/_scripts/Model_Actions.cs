@@ -23,6 +23,7 @@ public class Model_Actions : MonoBehaviour
             if (timer <= 0)
             {
                 ToggleActionList();
+                GetComponent<Model_Piece>().mainShip.GetComponent<Rigidbody>().AddForce(Vector3.up * 20.0f * Time.deltaTime);
                 timer = timerCycle;
             }
         }
