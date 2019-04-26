@@ -6,9 +6,11 @@ public class Lever : MonoBehaviour
 {
     public bool on, debugbool;
     public Material onColor, offColor;
-    public GameObject ofOffLightObject, grabberHandle, visualHandle,selectedLocObj; //has grab script, visual handle is jointed to this
+    public GameObject objectToSendMessage,ofOffLightObject, grabberHandle, visualHandle,selectedLocObj; //has grab script, visual handle is jointed to this
     public List<GameObject> selectorNotches;
     public int dialSetting;
+    public float distanceToCheck; //how far the lever is pulled to register as a valid pull
+    public string messageTosend;
     // Start is called before the first frame update
     void Start()
     {
@@ -22,18 +24,18 @@ public class Lever : MonoBehaviour
     }
     public void HandleReleased()
     {
-        if (grabberHandle.transform.localPosition.z < 0.4f)
+       // if (grabberHandle.transform.localPosition.z < 0.4f)
+       // {
+         //   on = false;
+          //  ofOffLightObject.GetComponent<Renderer>().material = offColor;
+          //  grabberHandle.GetComponent<ConfigurableJoint>().targetPosition = new Vector3(0, 0, -0.2f);
+       // }
+        if (grabberHandle.transform.localPosition.z > distanceToCheck)
         {
-            on = false;
-            ofOffLightObject.GetComponent<Renderer>().material = offColor;
-            grabberHandle.GetComponent<ConfigurableJoint>().targetPosition = new Vector3(0, 0, -0.2f);
-        }
-        if (grabberHandle.transform.localPosition.z > 0.5f)
-        {
-
-            on = true;
-            ofOffLightObject.GetComponent<Renderer>().material = onColor;
-            grabberHandle.GetComponent<ConfigurableJoint>().targetPosition = new Vector3(0, 0, -0.7f);
+            objectToSendMessage.SendMessage(messageTosend);
+           // on = true;
+           // ofOffLightObject.GetComponent<Renderer>().material = onColor;
+           // grabberHandle.GetComponent<ConfigurableJoint>().targetPosition = new Vector3(0, 0, -0.7f);
 
         }
     }

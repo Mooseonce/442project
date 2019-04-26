@@ -5,9 +5,9 @@ using UnityEngine;
 public class Model_Actions : MonoBehaviour
 {
     public int action;
-    public float timer,timerCycle;
+    public float timer,timerCycle,power;
     public bool toggleType, isOn;
-    public GameObject gun, bullet,wingleft,wingright;
+    public GameObject gun, bullet,wingleft,wingright,movablePiece;
     // Start is called before the first frame update
     void Start()
     {
@@ -23,7 +23,7 @@ public class Model_Actions : MonoBehaviour
             if (timer <= 0)
             {
                 ToggleActionList();
-                GetComponent<Model_Piece>().mainShip.GetComponent<Rigidbody>().AddForce(Vector3.up * 20.0f * Time.deltaTime);
+                
                 timer = timerCycle;
             }
         }
@@ -40,7 +40,7 @@ public class Model_Actions : MonoBehaviour
                 break;
             case 1:
 
-                GetComponent<Rigidbody>().AddForce( transform.forward * 10.0f * Time.deltaTime,ForceMode.Impulse);
+                GetComponent<Rigidbody>().AddForce( (gun.transform.position - transform.position) * 10.0f * Time.deltaTime,ForceMode.Impulse);
       
                 break;
             case 2:
@@ -50,6 +50,9 @@ public class Model_Actions : MonoBehaviour
                 break;
             case 3:
                 if (isOn == true) { isOn = false; GetComponent<Model_Piece>().mainShip.GetComponent<Rigidbody>().useGravity = true; } else { timer = timerCycle; isOn = true; }
+                break;
+            case 4:
+                if (isOn == true) { isOn = false;  } else { timer = timerCycle; isOn = true; }
                 break;
             default:
                 Debug.Log("Default case");
@@ -79,7 +82,11 @@ public class Model_Actions : MonoBehaviour
             case 3:
                 wingleft.GetComponent<Rigidbody>().AddForce(transform.forward * -100.0f * Time.deltaTime, ForceMode.Impulse);
                 wingright.GetComponent<Rigidbody>().AddForce(transform.forward * -100.0f * Time.deltaTime, ForceMode.Impulse);
-                GetComponent<Model_Piece>().mainShip.GetComponent<Rigidbody>().useGravity = false;
+                GetComponent<Model_Piece>().mainShip.GetComponent<Rigidbody>().AddForce(Vector3.up * 20.0f * Time.deltaTime);
+                //GetComponent<Model_Piece>().mainShip.GetComponent<Rigidbody>().useGravity = false;
+                break;
+            case 4:
+                movablePiece.GetComponent<Rigidbody>().AddTorque(transform.right * power * Time.deltaTime);
                 break;
             default:
 

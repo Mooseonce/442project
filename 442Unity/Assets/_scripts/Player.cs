@@ -19,12 +19,13 @@ public class Player : MonoBehaviour
     void Update()
     {
         //axis 9 left trigger on vive
-        if (Input.GetAxis("HTC_VIU_UnityAxis4") > 0.5f && canChange == true)
+        //HTC_VIU_UnityAxis4
+        if (Input.GetAxis("HTC_VIU_UnityAxis5") > 0.5f && canChange == true)
         {
             canChange = false;
             ChangeTool();
         }
-        if (Input.GetAxis("HTC_VIU_UnityAxis4") == 0 )
+        if (Input.GetAxis("HTC_VIU_UnityAxis5") == 0 )
         {
             canChange = true;
            
