@@ -930,7 +930,7 @@ MonoBehaviour:
   mainHubPiece: 0
   canAttach: 0
   attached: 0
-  type: 5
+  type: 0
   mainShip: {fileID: 0}
   connectionPoint: {fileID: 0}
   colorIndicator: {fileID: 2549310717285064617}

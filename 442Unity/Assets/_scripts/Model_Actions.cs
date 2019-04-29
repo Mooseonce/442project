@@ -52,7 +52,7 @@ public class Model_Actions : MonoBehaviour
                 if (isOn == true) { isOn = false; GetComponent<Model_Piece>().mainShip.GetComponent<Rigidbody>().useGravity = true; } else { timer = timerCycle; isOn = true; }
                 break;
             case 4:
-                if (isOn == true) { isOn = false;  } else { timer = timerCycle; isOn = true; }
+                if (isOn == true) { isOn = false;  } else { timer = timerCycle; isOn = true; movablePiece.GetComponent<Rigidbody>().AddTorque(transform.right * power * Time.deltaTime); }
                 break;
             default:
                 Debug.Log("Default case");

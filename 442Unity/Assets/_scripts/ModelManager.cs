@@ -34,5 +34,5 @@ public class ModelManager : MonoBehaviour
     {
         activeMainModel.GetComponent<ModelMainBody>().ActivatePieces(colorToActivate);
     }
-
+    
 }

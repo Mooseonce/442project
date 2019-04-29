@@ -44,6 +44,9 @@ public class PhysicsButton : MonoBehaviour
             case 1:
                 controlledObject.SendMessage(messageToSend, GetComponent<Renderer>().material.color);
                 break;
+            case 2:
+                controlledObject.SendMessage(messageToSend);
+                break;
             default:
                 break;
                 
