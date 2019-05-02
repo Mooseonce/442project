@@ -29,12 +29,14 @@ public class Model_Piece : MonoBehaviour
     }
     public void PickedUp()
     {
-        canAttach = true;
-        GetComponent<Rigidbody>().isKinematic = false;
-        //  transform.parent = null;
-        if (GetComponent<FixedJoint>() != null) { Destroy(GetComponent<FixedJoint>()); }
-        if (attached == true) { attached = false; mainShip.GetComponent<ModelMainBody>().RemovePiece(type, this.gameObject); }
-
+        if (attached != true)
+        {
+            canAttach = true;
+            GetComponent<Rigidbody>().isKinematic = false;
+            //  transform.parent = null;
+            if (GetComponent<FixedJoint>() != null) { Destroy(GetComponent<FixedJoint>()); }
+            if (attached == true) { attached = false; mainShip.GetComponent<ModelMainBody>().RemovePiece(type, this.gameObject); }
+        }
     }
     public void LetGo()
     {
@@ -46,7 +48,7 @@ public class Model_Piece : MonoBehaviour
             mainShip = connectionPoint.transform.parent.GetComponent<Model_Piece>().mainShip;
                   mainShip.GetComponent<ModelMainBody>().AddPiece(type, this.gameObject);
             this.gameObject.AddComponent(typeof(FixedJoint)) ; GetComponent<FixedJoint>().connectedBody = connectionPoint.transform.parent.GetComponent<Rigidbody>();
-
+            GetComponent<Rigidbody>().useGravity = false;// mainShip.GetComponent<Rigidbody>().useGravity;
         }
         canAttach = false;
     }

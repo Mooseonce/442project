@@ -224,7 +224,7 @@ Rigidbody:
   m_Mass: 1
   m_Drag: 0
   m_AngularDrag: 0.5
-  m_UseGravity: 0
+  m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
@@ -304,12 +304,14 @@ MonoBehaviour:
   action: 0
   timer: 0
   timerCycle: 0
+  power: 0
   toggleType: 0
   isOn: 0
   gun: {fileID: 6505768307389431652}
   bullet: {fileID: 194366221619331238, guid: 42cfe567239b10542a2acdf921bde5ae, type: 3}
   wingleft: {fileID: 0}
   wingright: {fileID: 0}
+  movablePiece: {fileID: 0}
 --- !u!1 &6505768306002560635
 GameObject:
   m_ObjectHideFlags: 0

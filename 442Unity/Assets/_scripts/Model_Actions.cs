@@ -40,7 +40,7 @@ public class Model_Actions : MonoBehaviour
                 break;
             case 1:
 
-                GetComponent<Rigidbody>().AddForce( (gun.transform.position - transform.position) * 10.0f * Time.deltaTime,ForceMode.Impulse);
+                GetComponent<Rigidbody>().AddForce( ((gun.transform.position - transform.position).normalized) * 10.0f * Time.deltaTime,ForceMode.Impulse);
       
                 break;
             case 2:
@@ -49,7 +49,7 @@ public class Model_Actions : MonoBehaviour
                 
                 break;
             case 3:
-                if (isOn == true) { isOn = false; GetComponent<Model_Piece>().mainShip.GetComponent<Rigidbody>().useGravity = true; } else { timer = timerCycle; isOn = true; }
+                if (isOn == true) { isOn = false; GetComponent<Model_Piece>().mainShip.GetComponent<Rigidbody>().useGravity = true; } else { timer = timerCycle; isOn = true; GetComponent<Model_Piece>().mainShip.GetComponent<Rigidbody>().useGravity = false; }
                 break;
             case 4:
                 if (isOn == true) { isOn = false;  } else { timer = timerCycle; isOn = true; movablePiece.GetComponent<Rigidbody>().AddTorque(transform.right * power * Time.deltaTime); }
@@ -82,6 +82,7 @@ public class Model_Actions : MonoBehaviour
             case 3:
                 wingleft.GetComponent<Rigidbody>().AddForce(transform.forward * -100.0f * Time.deltaTime, ForceMode.Impulse);
                 wingright.GetComponent<Rigidbody>().AddForce(transform.forward * -100.0f * Time.deltaTime, ForceMode.Impulse);
+
                 GetComponent<Model_Piece>().mainShip.GetComponent<Rigidbody>().AddForce(Vector3.up * 20.0f * Time.deltaTime);
                 //GetComponent<Model_Piece>().mainShip.GetComponent<Rigidbody>().useGravity = false;
                 break;
