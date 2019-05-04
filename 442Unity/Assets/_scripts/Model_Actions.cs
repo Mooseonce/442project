@@ -61,7 +61,8 @@ public class Model_Actions : MonoBehaviour
                 
                 break;
             case 3:
-                GetComponent<Model_Piece>().mainShip.GetComponent<Rigidbody>().AddForce(Vector3.up * 20.0f * Time.deltaTime);
+             //   GetComponent<Model_Piece>().mainShip.
+                    GetComponent<Rigidbody>().AddForce(Vector3.up * 20.0f * Time.deltaTime);
                // if (isOn == true) { isOn = false; GetComponent<Model_Piece>().mainShip.GetComponent<Rigidbody>().useGravity = true; } else { timer = timerCycle; isOn = true; GetComponent<Model_Piece>().mainShip.GetComponent<Rigidbody>().useGravity = false; }
                 break;
             case 4:
@@ -94,11 +95,12 @@ public class Model_Actions : MonoBehaviour
                 GetComponent<Model_Piece>().mainShip.GetComponent<Rigidbody>().useGravity = false;
                 break;
             case 3:
-                wingleft.GetComponent<Rigidbody>().AddForce(transform.forward * -100.0f * levelValue * Time.deltaTime, ForceMode.Impulse);
+               // wingleft.GetComponent<Rigidbody>().AddForce(transform.forward * -100.0f * levelValue * Time.deltaTime, ForceMode.Impulse);
                 wingright.GetComponent<Rigidbody>().AddForce(transform.forward * -100.0f * levelValue * Time.deltaTime, ForceMode.Impulse);
 
-                GetComponent<Model_Piece>().mainShip.GetComponent<Rigidbody>().AddForce(Vector3.up * 20.0f * levelValue * Time.deltaTime);
-                //GetComponent<Model_Piece>().mainShip.GetComponent<Rigidbody>().useGravity = false;
+                //GetComponent<Model_Piece>().mainShip.
+                    GetComponent<Rigidbody>().AddForce(Vector3.up * 20.0f * levelValue * Time.deltaTime,ForceMode.Impulse);
+                GetComponent<Model_Piece>().mainShip.GetComponent<Rigidbody>().useGravity = false;
                 break;
             case 4:
                 movablePiece.GetComponent<Rigidbody>().AddTorque(transform.right * power * levelValue * Time.deltaTime);

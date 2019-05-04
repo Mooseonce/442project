@@ -750,7 +750,7 @@ GameObject:
   - component: {fileID: 4167171379291711478}
   - component: {fileID: 4167171379291711479}
   - component: {fileID: 4167171379291711473}
-  - component: {fileID: 4618744671279367005}
+  - component: {fileID: 8889107007454911839}
   m_Layer: 0
   m_Name: modelEngines
   m_TagString: Untagged
@@ -944,8 +944,8 @@ MonoBehaviour:
   wingleft: {fileID: 0}
   wingright: {fileID: 0}
   movablePiece: {fileID: 0}
---- !u!136 &4618744671279367005
-CapsuleCollider:
+--- !u!65 &8889107007454911839
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -954,10 +954,9 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.5
-  m_Height: 3
-  m_Direction: 1
-  m_Center: {x: 0, y: -0.1, z: 0}
+  serializedVersion: 2
+  m_Size: {x: 0.8, y: 2.5, z: 0.8}
+  m_Center: {x: 0, y: -0.2, z: 0}
 --- !u!1 &4506049817789559012
 GameObject:
   m_ObjectHideFlags: 0
