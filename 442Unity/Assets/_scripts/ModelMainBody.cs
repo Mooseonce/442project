@@ -48,7 +48,20 @@ public class ModelMainBody : MonoBehaviour
         { if (go.GetComponent<Model_Piece>().GetColorId() == colorToActivate) { go.GetComponent<Model_Actions>().ActionList(); }  }
 
     }
+    //set objects to loop their action
 
+    public void ActivatePiecesToggleOn(Color colorToActivate)
+    {
+        foreach (GameObject go in actionPieces)
+        { if (go.GetComponent<Model_Piece>().GetColorId() == colorToActivate) { go.GetComponent<Model_Actions>().ToggleOnOff(); } }
+
+    }
+    public void ActivatePiecesToggleOnWithValue(Color colorToActivate,float currentLevel)
+    {
+        foreach (GameObject go in actionPieces)
+        { if (go.GetComponent<Model_Piece>().GetColorId() == colorToActivate) { go.GetComponent<Model_Actions>().settogglepower(currentLevel); go.GetComponent<Model_Actions>().ToggleOnOff(); } }
+
+    }
     public void ActivateLasers()
     {
         foreach (GameObject go in lasers)

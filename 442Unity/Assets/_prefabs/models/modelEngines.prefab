@@ -934,9 +934,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   action: 1
   timer: 0
-  timerCycle: 0
-  power: 0
-  toggleType: 0
+  timerCycle: 0.1
+  power: 100
+  levelValue: 1
+  toggleType: 1
   isOn: 0
   gun: {fileID: 4167171379179712882}
   bullet: {fileID: 0}

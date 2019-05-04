@@ -303,8 +303,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   action: 0
   timer: 0
-  timerCycle: 0
+  timerCycle: 1
   power: 0
+  levelValue: 1
   toggleType: 0
   isOn: 0
   gun: {fileID: 6505768307389431652}

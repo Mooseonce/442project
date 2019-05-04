@@ -37,6 +37,25 @@ public class ModelManager : MonoBehaviour
             activeMainModel.GetComponent<ModelMainBody>().ActivatePieces(colorToActivate);
         }
     }
+    public void ActivatePiecesToggleOn(Color colorToActivate)
+    {
+        if (activeMainModel != null)
+        {
+            activeMainModel.GetComponent<ModelMainBody>().ActivatePiecesToggleOn(colorToActivate);
+        }
+
+    }
+    public void ActivatePiecesToggleOnWithValue(Color colorToActivate, float currentLevel)
+    {
+        if (activeMainModel != null)
+        {
+            activeMainModel.GetComponent<ModelMainBody>().ActivatePiecesToggleOnWithValue(colorToActivate, currentLevel);
+        }
+
+    }
+
+
+
     public void returnparent()
     {
         if (activeMainModel != null)

@@ -953,7 +953,8 @@ MonoBehaviour:
   timer: 0
   timerCycle: 1
   power: 50
-  toggleType: 0
+  levelValue: 1
+  toggleType: 1
   isOn: 0
   gun: {fileID: 2549310717906230963}
   bullet: {fileID: 0}

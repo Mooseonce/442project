@@ -6,9 +6,9 @@ public class Lever : MonoBehaviour
 {
     public bool on, debugbool;
     public Material onColor, offColor;
-    public GameObject objectToSendMessage,ofOffLightObject, grabberHandle, visualHandle,selectedLocObj; //has grab script, visual handle is jointed to this
+    public GameObject objectToSendMessage,ofOffLightObject, grabberHandle, visualHandle,selectedLocObj,colorIndicator; //has grab script, visual handle is jointed to this
     public List<GameObject> selectorNotches;
-    public int dialSetting;
+    public int dialSetting,actiontype;//action type: what object this level interacts with
     public float distanceToCheck; //how far the lever is pulled to register as a valid pull
     public string messageTosend;
     // Start is called before the first frame update
@@ -30,12 +30,17 @@ public class Lever : MonoBehaviour
           //  ofOffLightObject.GetComponent<Renderer>().material = offColor;
           //  grabberHandle.GetComponent<ConfigurableJoint>().targetPosition = new Vector3(0, 0, -0.2f);
        // }
-        if (grabberHandle.transform.localPosition.z > distanceToCheck)
+        if (Mathf.Abs(grabberHandle.transform.localPosition.z) > distanceToCheck)
         {
-            objectToSendMessage.SendMessage(messageTosend);
-           // on = true;
-           // ofOffLightObject.GetComponent<Renderer>().material = onColor;
-           // grabberHandle.GetComponent<ConfigurableJoint>().targetPosition = new Vector3(0, 0, -0.7f);
+
+            // on = true;
+            // ofOffLightObject.GetComponent<Renderer>().material = onColor;
+            // grabberHandle.GetComponent<ConfigurableJoint>().targetPosition = new Vector3(0, 0, -0.7f);
+            if (actiontype == 1)//1 for sending colors to the model parent
+            { objectToSendMessage.SendMessage(messageTosend, colorIndicator.GetComponent<Renderer>().material.color); }
+            else if (actiontype == 2)
+            { objectToSendMessage.GetComponent<ModelManager>().ActivatePiecesToggleOnWithValue(colorIndicator.GetComponent<Renderer>().material.color, grabberHandle.transform.localPosition.z); } else
+            { objectToSendMessage.SendMessage(messageTosend); }
 
         }
     }
