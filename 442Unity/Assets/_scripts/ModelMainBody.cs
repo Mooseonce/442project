@@ -59,22 +59,8 @@ public class ModelMainBody : MonoBehaviour
     public void ActivatePiecesToggleOnWithValue(Color colorToActivate,float currentLevel)
     {
         foreach (GameObject go in actionPieces)
-        { if (go.GetComponent<Model_Piece>().GetColorId() == colorToActivate) { go.GetComponent<Model_Actions>().settogglepower(currentLevel); go.GetComponent<Model_Actions>().ToggleOnOff(); } }
+        { if (go.GetComponent<Model_Piece>().GetColorId() == colorToActivate) { go.GetComponent<Model_Actions>().settogglepower(currentLevel); go.GetComponent<Model_Actions>().TurnOn(); } }
 
     }
-    public void ActivateLasers()
-    {
-        foreach (GameObject go in lasers)
-        { go.GetComponent<Model_Piece>().FireLaser(); }
 
-    }
-    public void ActivateEngines()
-    {
-        Vector3 tempvec = Vector3.zero;
-        foreach (GameObject go in engines)
-        { tempvec += go.transform.forward; }
-        // transform.position += 
-        timer = 1.0f;
-        currentVelocity = tempvec;
-    }
 }

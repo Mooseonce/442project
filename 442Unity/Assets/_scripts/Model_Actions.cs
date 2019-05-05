@@ -35,6 +35,11 @@ public class Model_Actions : MonoBehaviour
         else
         { timer = timerCycle; isOn = true; }
     }
+
+    public void TurnOn()
+    {
+        timer = timerCycle; isOn = true;
+    }
     public void settogglepower(float newval)
     {
         if (newval == 0) { levelValue = 1.0f; } else { levelValue = Mathf.Sign(newval) * (1 + newval) ; }
@@ -47,7 +52,7 @@ public class Model_Actions : MonoBehaviour
         {
             case 0:
                 GameObject clone = Instantiate(bullet, gun.transform.position, transform.rotation);
-                clone.GetComponent<Rigidbody>().AddForce(gun.transform.up * 200.0f * Time.deltaTime,ForceMode.Impulse);
+                clone.GetComponent<Rigidbody>().AddForce(gun.transform.up * power * Time.deltaTime,ForceMode.Impulse);
                 clone.GetComponent<DieInTime>().timer = 5;
                 break;
             case 1:
@@ -56,13 +61,13 @@ public class Model_Actions : MonoBehaviour
       
                 break;
             case 2:
-                wingleft.GetComponent<Rigidbody>().AddForce(transform.forward * -100.0f * Time.deltaTime, ForceMode.Impulse);
-                wingright.GetComponent<Rigidbody>().AddForce(transform.forward * -100.0f * Time.deltaTime, ForceMode.Impulse);
+                wingleft.GetComponent<Rigidbody>().AddForce(transform.forward * -power * Time.deltaTime, ForceMode.Impulse);
+                wingright.GetComponent<Rigidbody>().AddForce(transform.forward * -power * Time.deltaTime, ForceMode.Impulse);
                 
                 break;
             case 3:
              //   GetComponent<Model_Piece>().mainShip.
-                    GetComponent<Rigidbody>().AddForce(Vector3.up * 20.0f * Time.deltaTime);
+                    GetComponent<Rigidbody>().AddForce(Vector3.up * power * Time.deltaTime);
                // if (isOn == true) { isOn = false; GetComponent<Model_Piece>().mainShip.GetComponent<Rigidbody>().useGravity = true; } else { timer = timerCycle; isOn = true; GetComponent<Model_Piece>().mainShip.GetComponent<Rigidbody>().useGravity = false; }
                 break;
             case 4:
@@ -81,29 +86,29 @@ public class Model_Actions : MonoBehaviour
         {
             case 0:
                 GameObject clone = Instantiate(bullet, gun.transform.position, transform.rotation);
-                clone.GetComponent<Rigidbody>().AddForce(gun.transform.forward * 10.0f * levelValue * Time.deltaTime);
+                clone.GetComponent<Rigidbody>().AddForce(gun.transform.forward * power * levelValue * Time.deltaTime);
                 clone.GetComponent<DieInTime>().timer = 5;
                 break;
             case 1:
 
-                GetComponent<Rigidbody>().AddForce(transform.forward * 20.0f * levelValue * Time.deltaTime, ForceMode.Impulse);
+                GetComponent<Rigidbody>().AddForce(transform.forward * power * levelValue * Time.deltaTime, ForceMode.Impulse);
               
                 break;
             case 2:
-                wingleft.GetComponent<Rigidbody>().AddForce(transform.forward * -100.0f * Time.deltaTime, ForceMode.Impulse);
-                wingright.GetComponent<Rigidbody>().AddForce(transform.forward * -100.0f * Time.deltaTime, ForceMode.Impulse);
+                wingleft.GetComponent<Rigidbody>().AddForce(transform.forward * -power * Time.deltaTime, ForceMode.Impulse);
+                wingright.GetComponent<Rigidbody>().AddForce(transform.forward * -power * Time.deltaTime, ForceMode.Impulse);
                 GetComponent<Model_Piece>().mainShip.GetComponent<Rigidbody>().useGravity = false;
                 break;
             case 3:
-               // wingleft.GetComponent<Rigidbody>().AddForce(transform.forward * -100.0f * levelValue * Time.deltaTime, ForceMode.Impulse);
-                wingright.GetComponent<Rigidbody>().AddForce(transform.forward * -100.0f * levelValue * Time.deltaTime, ForceMode.Impulse);
+                // wingleft.GetComponent<Rigidbody>().AddForce(transform.forward * -power * levelValue * Time.deltaTime, ForceMode.Impulse);
+                wingright.GetComponent<Rigidbody>().AddForce(transform.forward * -power * levelValue * Time.deltaTime, ForceMode.Impulse);
 
                 //GetComponent<Model_Piece>().mainShip.
-                    GetComponent<Rigidbody>().AddForce(Vector3.up * 20.0f * levelValue * Time.deltaTime,ForceMode.Impulse);
+                    GetComponent<Rigidbody>().AddForce(Vector3.up * power * levelValue * Time.deltaTime,ForceMode.Impulse);
                 GetComponent<Model_Piece>().mainShip.GetComponent<Rigidbody>().useGravity = false;
                 break;
             case 4:
-                movablePiece.GetComponent<Rigidbody>().AddTorque(transform.right * power * levelValue * Time.deltaTime);
+                movablePiece.GetComponent<Rigidbody>().AddTorque(transform.right * power * levelValue * Time.deltaTime,ForceMode.Impulse);
                 break;
             default:
 

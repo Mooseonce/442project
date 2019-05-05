@@ -1,0 +1,209 @@
+fileFormatVersion: 2
+guid: 1cc16249249c5ad4aa091ff48ab67bb7
+ModelImporter:
+  serializedVersion: 23
+  fileIDToRecycleName:
+    100000: EASTEREGGCAMERA
+    100002: group_0
+    100004: group_1
+    100006: ID103
+    100008: ID117
+    100010: ID123
+    100012: ID129
+    100014: ID137
+    100016: ID14
+    100018: ID145
+    100020: ID151
+    100022: ID155
+    100024: ID159
+    100026: ID22
+    100028: ID28
+    100030: ID34
+    100032: ID40
+    100034: ID46
+    100036: ID52
+    100038: ID58
+    100040: ID64
+    100042: ID70
+    100044: ID84
+    100046: ID90
+    100048: instance_0
+    100050: //RootNode
+    100052: skp_camera_Last_Saved_SketchUp_View
+    400000: EASTEREGGCAMERA
+    400002: group_0
+    400004: group_1
+    400006: ID103
+    400008: ID117
+    400010: ID123
+    400012: ID129
+    400014: ID137
+    400016: ID14
+    400018: ID145
+    400020: ID151
+    400022: ID155
+    400024: ID159
+    400026: ID22
+    400028: ID28
+    400030: ID34
+    400032: ID40
+    400034: ID46
+    400036: ID52
+    400038: ID58
+    400040: ID64
+    400042: ID70
+    400044: ID84
+    400046: ID90
+    400048: instance_0
+    400050: //RootNode
+    400052: skp_camera_Last_Saved_SketchUp_View
+    2000000: skp_camera_Last_Saved_SketchUp_View
+    2100000: material_6
+    2100002: Gump
+    2100004: __Gainsboro_
+    2300000: EASTEREGGCAMERA
+    2300002: group_0
+    2300004: group_1
+    2300006: ID103
+    2300008: ID117
+    2300010: ID123
+    2300012: ID129
+    2300014: ID137
+    2300016: ID14
+    2300018: ID22
+    2300020: ID28
+    2300022: ID34
+    2300024: ID40
+    2300026: ID46
+    2300028: ID52
+    2300030: ID58
+    2300032: ID64
+    2300034: ID70
+    2300036: ID84
+    2300038: ID90
+    3300000: EASTEREGGCAMERA
+    3300002: group_0
+    3300004: group_1
+    3300006: ID103
+    3300008: ID117
+    3300010: ID123
+    3300012: ID129
+    3300014: ID137
+    3300016: ID14
+    3300018: ID22
+    3300020: ID28
+    3300022: ID34
+    3300024: ID40
+    3300026: ID46
+    3300028: ID52
+    3300030: ID58
+    3300032: ID64
+    3300034: ID70
+    3300036: ID84
+    3300038: ID90
+    4300000: EASTEREGGCAMERA
+    4300002: ID117
+    4300004: ID123
+    4300006: ID129
+    4300008: ID137
+    4300010: group_0
+    4300012: ID14
+    4300014: ID22
+    4300016: ID28
+    4300018: ID34
+    4300020: ID40
+    4300022: ID46
+    4300024: ID52
+    4300026: ID58
+    4300028: ID64
+    4300030: ID70
+    4300032: group_1
+    4300034: ID84
+    4300036: ID90
+    4300038: ID103
+  externalObjects: {}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    previousCalculatedGlobalScale: 1
+    hasPreviousCalculatedGlobalScale: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

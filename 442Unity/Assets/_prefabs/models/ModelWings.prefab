@@ -992,7 +992,7 @@ MonoBehaviour:
   action: 3
   timer: 0
   timerCycle: 1
-  power: 0
+  power: 100
   levelValue: 1
   toggleType: 1
   isOn: 0

@@ -255,7 +255,7 @@ MonoBehaviour:
   action: 3
   timer: 0
   timerCycle: 1
-  power: 0
+  power: 100
   levelValue: 1
   toggleType: 1
   isOn: 0
@@ -517,7 +517,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 799a5f6915fd574478b50c38c25d9f46, type: 2}
+  - {fileID: 2100000, guid: 57908ff85fa5dc647a8acdd8c8efbd26, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -945,7 +945,7 @@ HingeJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 0, y: 1, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0, y: 0, z: 0}
+  m_ConnectedAnchor: {x: 0, y: -0.30200005, z: 0.000000037252903}
   m_UseSpring: 1
   m_Spring:
     spring: 5

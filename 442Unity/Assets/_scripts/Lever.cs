@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Lever : MonoBehaviour
 {
-    public bool on, debugbool;
+    public bool on, debugbool,alwaysOn;//always on: values updated based on lever location
     public Material onColor, offColor;
     public GameObject objectToSendMessage,ofOffLightObject, grabberHandle, visualHandle,selectedLocObj,colorIndicator; //has grab script, visual handle is jointed to this
     public List<GameObject> selectorNotches;
@@ -21,6 +21,11 @@ public class Lever : MonoBehaviour
     void Update()
     {
         if (debugbool == true) { debugbool = false; HandleReleased(); }
+        if (alwaysOn == true)
+        {
+
+        }
+
     }
     public void HandleReleased()
     {
