@@ -38,7 +38,7 @@ public class Model_Actions : MonoBehaviour
 
     public void TurnOn()
     {
-        timer = timerCycle; isOn = true;
+        timer = 0; isOn = true;
     }
     public void settogglepower(float newval)
     {
